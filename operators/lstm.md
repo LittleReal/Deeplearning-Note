@@ -1,5 +1,5 @@
 # LSTM
-
+## RNN
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3NjA3Njc3XX0=
+eyJoaXN0b3J5IjpbMTYwMjg0NjEyM119
 -->
