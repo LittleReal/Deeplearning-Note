@@ -40,6 +40,9 @@ LSTM结构 (右) 和RNN的主要区别如下图所示
 LSTM的整体结构及其中一个单元的结构如下
 
 ![LSTM_1](./lstm_1.png)
+
+![z_zi](./z_zi.jpg)
+![zf_zo](./zf_zo.jpg)
 ![LSTM_2](./lstm_2.jpg)
 
 其中，$z$、$z^i$、$z^f$、$z^o$，是由拼接向量乘以权重矩阵之后，再通过激活函数获取的值。$z^i$、$z^f$、$z^o$ 对应的激活函数是 $sigmoid$，而 $z$ 对应的激活函数是 $tanh$，$z$ 使用 $tanh$ 是因为这里是将其作为输入数据，而不是门控信号。
@@ -53,9 +56,14 @@ LSTM内部主要有三个阶段：
 2. 选择记忆阶段。这个阶段将这个阶段的输入有选择性地进行“记忆”。主要是会对输入 $x^t$ 进行选择记忆。哪些重要则着重记录下来，哪些不重要则少记一些。当前的输入内容由前面计算得到的 $z$ 表示。而选择的门控信号则是由 $z^i$ ($i$ 代表 information) 来进行控制。将上面两步得到的结果相加，即可得到传输给下一个状态的 $c^t$。也就是上图中的第一个公式。
 
 3. 输出阶段。这个阶段将决定哪些将会被当成当前状态的输出。主要是通过 $z^o$ 来进行控制的。并且还对上一阶段得到的 $c^o$ 进行了放缩 (通过一个tanh激活函数进行变化)。与普通RNN类似，输出 $y^t$ 往往最终也是通过  $h^t$ 变化得到。
+
+### 总结
+以上，就是 LSTM 的内部结构。通过门控状态来控制传输状态，记住需要长时间记忆的，忘记不重要的信息；而不像普通的RNN那样只能够用仅有一种记忆叠加方式。LSTM 对很多需要“长期记忆”的任务来说，尤其好用。
+
+但也因为引入了很多内容，导致参数变多，也使得训练难度加大了很多。因此很多时候我们往往会使用效果和LSTM相当但参数更少的GRU来构建大训练量的模型。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3NzQ3NDc0NCwtMjAzNjY2MDc1MywtND
-QwMTA5OTQ4LDE2OTUyMzU3NzQsMzk5NjkzNzg4LC0zNDA1ODQ1
-MjgsLTE4NDgyNzg1MjYsMTk2Mzk0OTUyNCwxMTI4MDA4OTE2LC
-04Njk1Mjg5NzFdfQ==
+eyJoaXN0b3J5IjpbLTE4MjQxMjM3NDcsLTQ3NzQ3NDc0NCwtMj
+AzNjY2MDc1MywtNDQwMTA5OTQ4LDE2OTUyMzU3NzQsMzk5Njkz
+Nzg4LC0zNDA1ODQ1MjgsLTE4NDgyNzg1MjYsMTk2Mzk0OTUyNC
+wxMTI4MDA4OTE2LC04Njk1Mjg5NzFdfQ==
 -->
