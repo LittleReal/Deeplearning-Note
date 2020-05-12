@@ -26,11 +26,22 @@ RNN的主要特点是可以处理序列化数据，比如某个单词的意思�
 
 ## LSTM
 
+### LSTM和RNN的区别
+
 LSTM (Long Short Term)是一种 RNN 特殊的类型，可以学习长期依赖信息，解决了RNN中间隔变大丧失学习能力的问题。
 
+LSTM结构 (右) 和RNN的主要区别如下图所示
+
+![RNN-Single](./rnn_lstm.jpg)
+
+相比RNN只有一个传递状态  $h^t$，LSTM有两个传输状态，  $c^t$ (cell state) 和 $h^t$ (hidden state)。(Tips：RNN中的 $h^t$ 对应于LSTM中的 $c^{t}$)。其中对于传递下去的  $c^{t}$ 改变得很慢，通常输出的 $c^{t}$ 是上一个状态传过来的 $c^{t-1}$ 加上一些数值。而  $h^t$  则在不同节点下往往会有很大的区别。
+
+### LSTM的结构剖析
+LSTM的整体结构及其中一个单元的结构如下
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ0MDEwOTk0OCwxNjk1MjM1Nzc0LDM5OT
-Y5Mzc4OCwtMzQwNTg0NTI4LC0xODQ4Mjc4NTI2LDE5NjM5NDk1
-MjQsMTEyODAwODkxNiwtODY5NTI4OTcxXX0=
+eyJoaXN0b3J5IjpbMjA0MTUyOTU4MSwtNDQwMTA5OTQ4LDE2OT
+UyMzU3NzQsMzk5NjkzNzg4LC0zNDA1ODQ1MjgsLTE4NDgyNzg1
+MjYsMTk2Mzk0OTUyNCwxMTI4MDA4OTE2LC04Njk1Mjg5NzFdfQ
+==
 -->
