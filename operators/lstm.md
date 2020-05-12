@@ -8,7 +8,7 @@ RNN (Recurrent Neural Network，循环神经网络) 的简图如下，
 
 RNN其中一个单元的细节如下图，
 
-![RNN-Single](./rnn-single.jpg)
+![RNN-Single](./rnn_single.jpg)
 
 $x$ 为当前状态下数据的输入，  $h$  表示接收到的上一个节点的输入。
 
@@ -62,8 +62,8 @@ LSTM内部主要有三个阶段：
 
 但也因为引入了很多内容，导致参数变多，也使得训练难度加大了很多。因此很多时候我们往往会使用效果和LSTM相当但参数更少的GRU来构建大训练量的模型。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjQxMjM3NDcsLTQ3NzQ3NDc0NCwtMj
-AzNjY2MDc1MywtNDQwMTA5OTQ4LDE2OTUyMzU3NzQsMzk5Njkz
-Nzg4LC0zNDA1ODQ1MjgsLTE4NDgyNzg1MjYsMTk2Mzk0OTUyNC
-wxMTI4MDA4OTE2LC04Njk1Mjg5NzFdfQ==
+eyJoaXN0b3J5IjpbNzg4NDUwOTg3LC0xODI0MTIzNzQ3LC00Nz
+c0NzQ3NDQsLTIwMzY2NjA3NTMsLTQ0MDEwOTk0OCwxNjk1MjM1
+Nzc0LDM5OTY5Mzc4OCwtMzQwNTg0NTI4LC0xODQ4Mjc4NTI2LD
+E5NjM5NDk1MjQsMTEyODAwODkxNiwtODY5NTI4OTcxXX0=
 -->
