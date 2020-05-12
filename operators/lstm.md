@@ -42,11 +42,20 @@ LSTM的整体结构及其中一个单元的结构如下
 ![LSTM_1](./lstm_1.png)
 ![LSTM_2](./lstm_2.jpg)
 
-其中，$z^i$，$z^f$ $$
+其中，$z$、$z^i$、$z^f$、$z^o$，是由拼接向量乘以权重矩阵之后，再通过激活函数获取的值。$z^i$、$z^f$、$z^o$ 对应的激活函数是 $sigmoid$，而 $z$ 对应的激活函数是 $tanh$，$z$ 使用 $tanh$ 是因为这里是将其作为输入数据，而不是门控信号。
 
+![[公式]](https://www.zhihu.com/equation?tex=%5Codot)  是Hadamard Product，也就是操作矩阵中对应的元素相乘，因此要求两个相乘矩阵是同型的。 ![[公式]](https://www.zhihu.com/equation?tex=%5Coplus)  则代表进行矩阵加法。
+
+LSTM内部主要有三个阶段：
+1. 忘记阶段。这个阶段主要是对上一个节点传进来的输入进行**选择性**忘记。简单来说就是会 “忘记不重要的，记住重要的”。
+具体来说是通过计算得到的  $z^f$ ($f$ 表示forget) 来作为忘记门控，来控制上一个状态的$c^{t-1}$ 哪些需要留哪些需要忘。
+
+2. 选择记忆阶段。这个阶段将这个阶段的输入有选择性地进行“记忆”。主要是会对输入 $x^t$ 进行选择记忆。哪些重要则着重记录下来，哪些不重要则少记一些。当前的输入内容由前面计算得到的 $z$ 表示。而选择的门控信号则是由 $z^i$ ($i$ 代表 information) 来进行控制。将上面两步得到的结果相加，即可得到传输给下一个状态的 $c^t$。也就是上图中的第一个公式。
+
+3. 输出阶段。这个阶段将决定哪些将会被当成当前状态的输出。主要是通过 $z^o$ 来进行控制的。并且还对上一阶段得到的 $c^o$ 进行了放缩 (通过一个tanh激活函数进行变化)。与普通RNN类似，输出 $y^t$ 往往最终也是通过  $h^t$ 变化得到。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMzY2NjA3NTMsLTQ0MDEwOTk0OCwxNj
-k1MjM1Nzc0LDM5OTY5Mzc4OCwtMzQwNTg0NTI4LC0xODQ4Mjc4
-NTI2LDE5NjM5NDk1MjQsMTEyODAwODkxNiwtODY5NTI4OTcxXX
-0=
+eyJoaXN0b3J5IjpbLTQ3NzQ3NDc0NCwtMjAzNjY2MDc1MywtND
+QwMTA5OTQ4LDE2OTUyMzU3NzQsMzk5NjkzNzg4LC0zNDA1ODQ1
+MjgsLTE4NDgyNzg1MjYsMTk2Mzk0OTUyNCwxMTI4MDA4OTE2LC
+04Njk1Mjg5NzFdfQ==
 -->
