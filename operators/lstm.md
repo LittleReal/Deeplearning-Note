@@ -32,16 +32,19 @@ LSTM (Long Short Term)是一种 RNN 特殊的类型，可以学习长期依赖�
 
 LSTM结构 (右) 和RNN的主要区别如下图所示
 
-![RNN-Single](./rnn_lstm.jpg)
+![RNN-LSTM](./rnn_lstm.jpg)
 
 相比RNN只有一个传递状态  $h^t$，LSTM有两个传输状态，  $c^t$ (cell state) 和 $h^t$ (hidden state)。(Tips：RNN中的 $h^t$ 对应于LSTM中的 $c^{t}$)。其中对于传递下去的  $c^{t}$ 改变得很慢，通常输出的 $c^{t}$ 是上一个状态传过来的 $c^{t-1}$ 加上一些数值。而  $h^t$  则在不同节点下往往会有很大的区别。
 
 ### LSTM的结构剖析
 LSTM的整体结构及其中一个单元的结构如下
 
+![LSTM_1](./lstm_1.png)
+![LSTM_2](./lstm_2.jpg)
+
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA0MTUyOTU4MSwtNDQwMTA5OTQ4LDE2OT
-UyMzU3NzQsMzk5NjkzNzg4LC0zNDA1ODQ1MjgsLTE4NDgyNzg1
-MjYsMTk2Mzk0OTUyNCwxMTI4MDA4OTE2LC04Njk1Mjg5NzFdfQ
-==
+eyJoaXN0b3J5IjpbMjE1MjU2NDc1LC00NDAxMDk5NDgsMTY5NT
+IzNTc3NCwzOTk2OTM3ODgsLTM0MDU4NDUyOCwtMTg0ODI3ODUy
+NiwxOTYzOTQ5NTI0LDExMjgwMDg5MTYsLTg2OTUyODk3MV19
 -->
