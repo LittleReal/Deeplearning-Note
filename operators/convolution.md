@@ -12,7 +12,17 @@
 `dilation` 空洞卷积参数，值为1时表示普通卷积，值大于1时，表示卷积核中每个卷积元素的感受野为 `2*dilation-1`，整体卷积核的感受野为`(kernel_size +1)*dilation-1`，具体可以参考[空洞卷积](https://blog.csdn.net/hao1994121/article/details/88371685)。
 `groups` 卷积分组，将输入channel分组进行卷积，可以减小参数量和计算量，同时不影响输入输出shape，参考[分组卷积](https://www.jianshu.com/p/20150e44bde8)。
 `bias` 是否有bias。
-`padding_mode`
+`padding_mode` `zeros`，`reflect`，`replicate` 或者 `circular`，一般默认`zeros`，即补0。
+
+在`Conv1D`中，输入输出数据均为3维`(n,c,l)`，`n`表示`batch_size`，`c`表示通道数，`l`表示输入数据中一个序列的长度。
+
+##  Conv2D
+
+在`Conv2D`中，输入输出数据均为4维`(n,c,h,w)`。其中`kernel`可以为`int`也可为`tuple`，为`tuple`时可以设置高宽不同的kenel，比如`kenel=(3,5)`。
+
+##  Conv3D
+
+在`Conv3D`中，输入输出数据均为5维`(n,c,h,w)`。同时`kernel`的shape必须为`(3,)`
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxMDI3Mzk2Nl19
+eyJoaXN0b3J5IjpbLTE3MDE3NzQwNDUsMTAxMDI3Mzk2Nl19
 -->
