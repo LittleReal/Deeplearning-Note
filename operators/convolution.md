@@ -22,7 +22,8 @@
 
 ##  Conv3D
 
-在`Conv3D`中，输入输出数据均为5维`(n,c,h,w)`。同时`kernel`的shape必须为`(3,)`
+在`Conv3D`中，输入输出数据均为5维`(n,c,h,w)`。同时`kernel`如果3个维度大小不一，如`(3,4,5)`，则其shape必须为`(3,)`。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MDE3NzQwNDUsMTAxMDI3Mzk2Nl19
+eyJoaXN0b3J5IjpbLTE0ODUwOTM2OTEsLTE3MDE3NzQwNDUsMT
+AxMDI3Mzk2Nl19
 -->
