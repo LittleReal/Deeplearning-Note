@@ -34,8 +34,7 @@
 
 在`Conv3D`中，输入输出数据均为5维`(n,c,h,w)`。同时`kernel`如果3个维度大小不一，如`(3,4,5)`，则其shape必须为`(3,)`。
 
-前向传播比较简单，对于隐层，隐层神经元 `h` 的输入如图所示为 ${\alpha}_h = \sum_{i=1}^d x_i$，那么该神经元的值为$b_h$ = sigmoid({\alpha}_h)$，各层的以此类推 。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NTgwMDU4NTAsLTE3MDE3NzQwNDUsMT
-AxMDI3Mzk2Nl19
+eyJoaXN0b3J5IjpbMjAxNzE1NTc3MSwtMTc1ODAwNTg1MCwtMT
+cwMTc3NDA0NSwxMDEwMjczOTY2XX0=
 -->
