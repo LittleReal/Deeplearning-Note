@@ -29,33 +29,30 @@
 
 ##  Conv2D
 
-在`Conv2D`中，输入输出数据均为4维`(n,c,h,w)`。其中`kernel`可以为`int`也可为`tuple`，为`tuple`时可以设置高宽不同的kenel，比如`kenel=(3,5)`。
+在`Conv2D`中，输入输出数据均为 4 维 (n,c,h,w)。其中 kernel 可以为 int 也可为 tuple，为 tuple 时可以设置高宽不同的 kenel，比如 kenel = (3,5)。
 
 ### Forward
 
-`forward`函数主要参考 `aten/src/ATen/native/ConvolutionMM2d.cpp`下的`slow_conv2d_forward_out_cpu`。主要思想是将`shape`为`(in_chnnel, in_h, in_w)`的`input` `im2col`成`shape`为`(in_chnnel*kh*kw, o_w*o_h)`的数据`finput`，将卷积`knnel`的`weight` `resize` 成 `(o_chnnel, in_chnnel*kh*kw)`的`weight_view`，然后直接进行矩阵乘法操作`weight_view*finpout`，得到`shape`为`(o_chnnel, o_h*ow)`，然后将其resize为`(o_chnnel, oh, ow)`，即为一个batch的`output`。
+forward 函数主要参考 aten/src/ATen/native/ConvolutionMM2d.cpp 下的 slow_conv2d_forward_out_cpu。主要思想是将 shape 为 (inC, inH, inW) 的 input im2col成 shape 为 (inC * kh * kw, oW * oH) 的数据 fInput，将卷积 knnel 的 weight reshape 成 (oC, inC * kh * kw) 的 weightView，然后直接进行矩阵乘法操作 $weightView \times fInpout$，得到 shape 为 (oC, oH * oW)，然后将其 reshape 为 (oC, oH, oW)，即为一个 batch 的 output。整体如图所示
+
+![CNN_Forward](./cnn_forward.jpg)
 
 ### Backword
-思想来源于`DNN`的[`backward`](./dnn.md)。
+思想来源于 DNN 的 [`backward`](./dnn.md)。
+
+按照 DNN 的思想，我们需要根据输出 (shape (b, oC, oH, oW)) 的梯度获取输入 (shape (b, in_c, in_h, in_w) ) 的梯度。在 `Forward` 中，我们已经将卷积操作转化为了如 DNN 中的全连接操作，在反向传播的过程中，仍然是将其转化为诸如 DNN 操作一样。先忽略 batch，首先将输出的梯度 gradO (oC, oH, oW) reshape 为 gradOR (oC, oW*oW)，那么
+
+$gradFinput = \frac{\delta E}{\delta fInput}} = weightView \times gradOR$
+
+再对 gradFinput 执行 im2col 的逆操作，即可可得到 gradIn，实现了偏导之间的层层传播。
+
+$\delta(weightView) = gradOR \times fInput^T$ 
+$\delta(b) = gradO$
 
 ##  Conv3D
 
-在`Conv3D`中，输入输出数据均为5维`(n,c,h,w)`。同时`kernel`如果3个维度大小不一，如`(3,4,5)`，则其shape必须为`(3,)`。
+在 `Conv3D` 中，输入输出数据均为 5 维 (n,c,h,w)。同时 kernel 如果3个维度大小不一，如 (3,4,5)，则其shape必须为 (3,)。
 
-
-假设损失函数 $E=\sum_{i=1}^d\frac{1}{2}(y_i-y_i')^2$，训练 `DNN` 的目的时使 $E$ 最小，反向传播时使用基于梯度下降的 `BP` 来优化。
-
-$\delta_j^2=\frac{\delta{E}}{\delta{\beta_j}}$=$\frac{\delta{E}}{\delta{y_j}}\frac{\delta{y_j}}{\delta{\beta}_j}$
-
-$\frac{\delta{E}}{\delta{w_{jh}}}$=$\frac{\delta{E}}{\delta{y_j}}\frac{\delta{y_j}}{\delta{\beta}_j}\frac{{\delta{\beta}_j}}{\delta{w_{jh}}}=\delta_j^2\frac{{\delta{\beta}_j}}{\delta{w_{jh}}}=\delta_j^2b_h$
-
-$\frac{\delta{E}}{\delta{b_h}} =\sum_{j=1}^l\frac{\delta{E}}{\delta{\beta}_j}w_{jh} =\sum_{j=1}^l\delta^2_jw_{jh}= w_h^T\times\delta^2$
-
-$\frac{\delta{E}}{\delta\alpha_h} =w_h^T\times{\delta}^2\sigma^{'}({b_h})$
-
-$\delta^1=\frac{\delta{E}}{\delta\alpha} = w^T\times{\delta}^2\sigma^{'}({b_h})$ 
-
-其中 $\delta$ 的上标代表的时网络中的层数。如果网络中有偏置量，则偏置向量的梯度为当前层的 $\delta$，这个比较好理解，因为神经元的输入值相对于偏置的导数为 1。
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTE3MzYyMzEyMTUsMTY3MDQ4Mzg5MywxNz
 UxMTEzODQ0LC05NzY2MTU4MzcsMTQ4MTkzMDI2MywtMTc1ODAw
