@@ -35,8 +35,17 @@
 在`Conv3D`中，输入输出数据均为5维`(n,c,h,w)`。同时`kernel`如果3个维度大小不一，如`(3,4,5)`，则其shape必须为`(3,)`。
 
 
-假设损失函数 $E=\sum_{i=1}^d\frac{1}{2}(y_i-y_i')^2$，训练 `DNN` 的目的时使 $E$ 最小，反向传播时使用基于梯度下降的 `BP` 来优化。$\delta$
+假设损失函数 $E=\sum_{i=1}^d\frac{1}{2}(y_i-y_i')^2$，训练 `DNN` 的目的时使 $E$ 最小，反向传播时使用基于梯度下降的 `BP` 来优化。
+
+$\delta_j^2=\frac{\delta{E}}{\delta{\beta_j}}$=$\frac{\delta{E}}{\delta{y_j}}\frac{\delta{y_j}}{\delta{\beta}_j}$
+
+$\frac{\delta{E}}{\delta{w_{hj}}}$=$\frac{\delta{E}}{\delta{y_j}}\frac{\delta{y_j}}{\delta{\beta}_j}\frac{{\delta{\beta}_j}}{\delta{w_{hj}}}=\delta_j^2\frac{{\delta{\beta}_j}}{\delta{w_{hj}}}=\delta_j^2b_h$
+
+$\frac{\delta{E}}{\delta{b_h}} =\sum_{j=1}^l\frac{\delta{E}}{\delta{\beta}_j}w_{hj} = w_h\\times$
+
+其中 $\delta$ 的上标代表的时网络中的层数
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk3NjYxNTgzNywxNDgxOTMwMjYzLC0xNz
-U4MDA1ODUwLC0xNzAxNzc0MDQ1LDEwMTAyNzM5NjZdfQ==
+eyJoaXN0b3J5IjpbMTc1MTExMzg0NCwtOTc2NjE1ODM3LDE0OD
+E5MzAyNjMsLTE3NTgwMDU4NTAsLTE3MDE3NzQwNDUsMTAxMDI3
+Mzk2Nl19
 -->
