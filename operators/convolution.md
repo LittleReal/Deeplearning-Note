@@ -1,6 +1,7 @@
 # Convolution
 
 ##  Conv1D
+
 以 pytorch 为例，网络中添加conv算子的定义如下
 `import torch`
 `torch.nn.Conv1d(in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros')`
@@ -27,6 +28,13 @@
 ##  Conv2D
 
 在`Conv2D`中，输入输出数据均为4维`(n,c,h,w)`。其中`kernel`可以为`int`也可为`tuple`，为`tuple`时可以设置高宽不同的kenel，比如`kenel=(3,5)`。
+
+### Forward
+
+`forward`函数主要参考 `aten/src/ATen/native/ConvolutionMM2d.cpp`下的`slow_conv2d_forward_out_cpu`。主要思想是将`shape`为`(in_chnnel, in_h, in_w)`的`input` `im2col`成`shape`为`(in_chnnel*kh*kw, o_w*o_h)`的数据`finput`，将卷积`knnel`的`weight` `resize` 成 `(o_chnnel, in_chnnel*kh*kw)`的`weight_view`，然后直接进行矩阵乘法操作`weight_view*finpout`，得到`shape`为`(o_chnnel, o_h*ow)`，然后将其resize为`(o_chnnel, oh, ow)`，即为一个batch的`output`。
+
+### Backword
+思想来源于`DNN`的[`backward`](./dnn.md)。
 
 ##  Conv3D
 
