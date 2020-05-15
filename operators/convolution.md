@@ -20,9 +20,11 @@
 
 `bias` 是否有bias。
 
-`padding_mode` `zeros`，`reflect`，`replicate` 或者 `circular`，一般默认`zeros`，即补0。
+`padding_mode` `zeros`，`reflect`，`replicate` 或者 `circular`，一般默认`zeros`，即补0。想了解各模式下的具体操作，可以参考[Padding Layer](https://pytorch.org/docs/master/nn.html#padding-layers)
 
 在`Conv1D`中，输入输出数据均为3维`(n,c,l)`，`n`表示`batch_size`，`c`表示通道数，`l`表示输入数据中一个序列的长度。
+
+在pytorch中，Conv1D是看作Conv2D来处理的。前向反向传播细节参考`Conv2D`
 
 ##  Conv2D
 
@@ -32,6 +34,6 @@
 
 在`Conv3D`中，输入输出数据均为5维`(n,c,h,w)`。同时`kernel`如果3个维度大小不一，如`(3,4,5)`，则其shape必须为`(3,)`。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODUwOTM2OTEsLTE3MDE3NzQwNDUsMT
-AxMDI3Mzk2Nl19
+eyJoaXN0b3J5IjpbLTUxODQ1MjI3NSwtMTcwMTc3NDA0NSwxMD
+EwMjczOTY2XX0=
 -->
