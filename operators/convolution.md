@@ -34,7 +34,9 @@
 
 在`Conv3D`中，输入输出数据均为5维`(n,c,h,w)`。同时`kernel`如果3个维度大小不一，如`(3,4,5)`，则其shape必须为`(3,)`。
 
+
+假设损失函数$E=\sum_{i=1}^d\frac{1}{2}(y_i-y_i')^2$
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAxNzE1NTc3MSwtMTc1ODAwNTg1MCwtMT
-cwMTc3NDA0NSwxMDEwMjczOTY2XX0=
+eyJoaXN0b3J5IjpbNDQyMTQwMjE4LC0xNzU4MDA1ODUwLC0xNz
+AxNzc0MDQ1LDEwMTAyNzM5NjZdfQ==
 -->
