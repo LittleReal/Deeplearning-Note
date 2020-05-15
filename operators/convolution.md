@@ -15,17 +15,17 @@
 
 `padding` padding的大小；
 
-`dilation` 空洞卷积参数，值为1时表示普通卷积，值大于1时，表示卷积核中每个卷积元素的感受野为 `2*dilation-1`，整体卷积核的感受野为`(kernel_size +1)*dilation-1`，具体可以参考[空洞卷积](https://blog.csdn.net/hao1994121/article/details/88371685)。
+`dilation` 空洞卷积参数，值为1时表示普通卷积，值大于1时，表示卷积核中每个卷积元素的感受野为 `2*dilation-1`，整体卷积核的感受野为 `(kernel_size +1)*dilation-1`，具体可以参考[空洞卷积](https://blog.csdn.net/hao1994121/article/details/88371685)。
 
 `groups` 卷积分组，将输入channel分组进行卷积，可以减小参数量和计算量，同时不影响输入输出shape，参考[分组卷积](https://www.jianshu.com/p/20150e44bde8)。
 
 `bias` 是否有bias。
 
-`padding_mode` `zeros`，`reflect`，`replicate` 或者 `circular`，一般默认`zeros`，即补0。想了解各模式下的具体操作，可以参考[Padding Layer](https://pytorch.org/docs/master/nn.html#padding-layers)
+`padding_mode` `zeros`，`reflect`，`replicate` 或者 `circular`，一般默认 `zeros`，即补0。想了解各模式下的具体操作，可以参考[Padding Layer](https://pytorch.org/docs/master/nn.html#padding-layers)
 
-在`Conv1D`中，输入输出数据均为3维`(n,c,l)`，`n`表示`batch_size`，`c`表示通道数，`l`表示输入数据中一个序列的长度。
+在`Conv1D`中，输入输出数据均为3维 (n,c,l)，n 表示 batch_size，c 表示通道数， l 表示输入数据中一个序列的长度。
 
-在pytorch中，Conv1D是看作Conv2D来处理的。前向反向传播细节参考`Conv2D`
+在pytorch中，Conv1D是看作Conv2D来处理的。前向反向传播细节参考 `Conv2D`。
 
 ##  Conv2D
 
