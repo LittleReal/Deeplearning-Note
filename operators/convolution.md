@@ -39,13 +39,15 @@
 
 $\delta_j^2=\frac{\delta{E}}{\delta{\beta_j}}$=$\frac{\delta{E}}{\delta{y_j}}\frac{\delta{y_j}}{\delta{\beta}_j}$
 
-$\frac{\delta{E}}{\delta{w_{hj}}}$=$\frac{\delta{E}}{\delta{y_j}}\frac{\delta{y_j}}{\delta{\beta}_j}\frac{{\delta{\beta}_j}}{\delta{w_{hj}}}=\delta_j^2\frac{{\delta{\beta}_j}}{\delta{w_{hj}}}=\delta_j^2b_h$
+$\frac{\delta{E}}{\delta{w_{jh}}}$=$\frac{\delta{E}}{\delta{y_j}}\frac{\delta{y_j}}{\delta{\beta}_j}\frac{{\delta{\beta}_j}}{\delta{w_{jh}}}=\delta_j^2\frac{{\delta{\beta}_j}}{\delta{w_{jh}}}=\delta_j^2b_h$
 
-$\frac{\delta{E}}{\delta{b_h}} =\sum_{j=1}^l\frac{\delta{E}}{\delta{\beta}_j}w_{hj} = w_h\\times$
+$\frac{\delta{E}}{\delta{b_h}} =\sum_{j=1}^l\frac{\delta{E}}{\delta{\beta}_j}w_{jh} =\sum_{j=1}^l\delta^2_jw_{jh}= w_h^T\times\delta^2$
+
+$\frac{\delta{E}}{\delta\alpha_h} =w_h^T\times{\delta}^2\sigma^{'}({b_h})$
 
 其中 $\delta$ 的上标代表的时网络中的层数
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc1MTExMzg0NCwtOTc2NjE1ODM3LDE0OD
-E5MzAyNjMsLTE3NTgwMDU4NTAsLTE3MDE3NzQwNDUsMTAxMDI3
-Mzk2Nl19
+eyJoaXN0b3J5IjpbMTY3MDQ4Mzg5MywxNzUxMTEzODQ0LC05Nz
+Y2MTU4MzcsMTQ4MTkzMDI2MywtMTc1ODAwNTg1MCwtMTcwMTc3
+NDA0NSwxMDEwMjczOTY2XX0=
 -->
