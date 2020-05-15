@@ -45,9 +45,11 @@ $\frac{\delta{E}}{\delta{b_h}} =\sum_{j=1}^l\frac{\delta{E}}{\delta{\beta}_j}w_{
 
 $\frac{\delta{E}}{\delta\alpha_h} =w_h^T\times{\delta}^2\sigma^{'}({b_h})$
 
-其中 $\delta$ 的上标代表的时网络中的层数
+$\delta^1=\frac{\delta{E}}{\delta\alpha} = w^T\times{\delta}^2\sigma^{'}({b_h})$ 
+
+其中 $\delta$ 的上标代表的时网络中的层数。如果网络中有偏置量，则偏置向量的梯度为当前层的 $\delta$，这个比较好理解，因为神经元的输入值相对于偏置的导数为 1。
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3MDQ4Mzg5MywxNzUxMTEzODQ0LC05Nz
-Y2MTU4MzcsMTQ4MTkzMDI2MywtMTc1ODAwNTg1MCwtMTcwMTc3
-NDA0NSwxMDEwMjczOTY2XX0=
+eyJoaXN0b3J5IjpbLTE3MzYyMzEyMTUsMTY3MDQ4Mzg5MywxNz
+UxMTEzODQ0LC05NzY2MTU4MzcsMTQ4MTkzMDI2MywtMTc1ODAw
+NTg1MCwtMTcwMTc3NDA0NSwxMDEwMjczOTY2XX0=
 -->
