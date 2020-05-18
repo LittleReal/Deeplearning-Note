@@ -29,25 +29,25 @@
 
 ##  Conv2D
 
-在`Conv2D`中，输入输出数据均为 4 维 (n,c,h,w)。其中 kernel 可以为 int 也可为 tuple，为 tuple 时可以设置高宽不同的 kenel，比如 kenel = (3,5)。
+在`Conv2D`中，输入输出数据均为 4 维 (n,c,h,w)。其中 kernel 可以为 int 也可为 tuple，为 tuple 时可以设置高宽不同的 kenel，比如 kenel = (3,5)。 `Forward` 与 `Backward` 的参考了 [pytorch conv2D](https://zhuanlan.zhihu.com/p/83517817)。
 
 ### Forward
 
-forward 函数主要参考 aten/src/ATen/native/ConvolutionMM2d.cpp 下的 slow_conv2d_forward_out_cpu。主要思想是将 shape 为 (inC, inH, inW) 的 input im2col成 shape 为 (inC * kh * kw, oW * oH) 的数据 fInput，将卷积 knnel 的 weight reshape 成 (oC, inC * kh * kw) 的 weightView，然后直接进行矩阵乘法操作 $weightView \times fInpout$，得到 shape 为 (oC, oH * oW)，然后将其 reshape 为 (oC, oH, oW)，即为一个 batch 的 output。整体如图所示
+forward 函数主要参考 aten/src/ATen/native/ConvolutionMM2d.cpp 下的 slow_conv2d_forward_cpu。主要思想是将 shape 为 (inC, inH, inW) 的 input im2col成 shape 为 (inC * kh * kw, oW * oH) 的数据 fInput，将卷积 knnel 的 weight reshape 成 (oC, inC * kh * kw) 的 weightView，然后直接进行矩阵乘法操作 $weightView \times fInpout$，得到 shape 为 (oC, oH * oW)，然后将其 reshape 为 (oC, oH, oW)，即为一个 batch 的 output。整体如图所示
 
 ![CNN_Forward](./cnn_forward.jpg)
 
 ### Backword
-思想来源于 DNN 的 [`backward`](./dnn.md)。
+思想来源于 DNN 的 [`backward`](./dnn.md)。backward 函数主要参考 aten/src/ATen/native/ConvolutionMM2d.cpp 下的 slow_conv2d_backward_cpu。
 
 按照 DNN 的思想，我们需要根据输出 (shape (b, oC, oH, oW)) 的梯度获取输入 (shape (b, in_c, in_h, in_w) ) 的梯度。在 `Forward` 中，我们已经将卷积操作转化为了如 DNN 中的全连接操作，在反向传播的过程中，仍然是将其转化为诸如 DNN 操作一样。先忽略 batch，首先将输出的梯度 gradO (oC, oH, oW) reshape 为 gradOR (oC, oW*oW)，那么
 
-$gradFinput = \frac{\delta E}{\delta fInput}} = weightView \times gradOR$
+$gradFinput = \frac{\delta E}{\delta fInput} = weightView \times gradOR$
 
 再对 gradFinput 执行 im2col 的逆操作，即可可得到 gradIn，实现了偏导之间的层层传播。
 
 $\delta(weightView) = gradOR \times fInput^T$ 
-$\delta(b) = gradO$
+$\delta(b) = \sum_{r=1}^{oH*oW}gradO$
 
 ##  Conv3D
 
