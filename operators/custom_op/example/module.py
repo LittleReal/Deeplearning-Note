@@ -21,5 +21,6 @@ class ExampleOpModule(Module):
     def __init__(self):
         super(ExampleOpModule, self).__init__()
 
-    def forward(self, input_x, input_y):#只需要定义forward的函数就可以了
+    #只需要定义forward的函数就可以了
+    def forward(self, input_x, input_y):
         return ExampleOpFunction.apply(input_x, input_y)
