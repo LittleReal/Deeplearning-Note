@@ -1,7 +1,9 @@
 # DNN
 如图所示为包含一个隐层的 `DNN` 结构,当然实际应用中可以包含多个隐层，但是一般隐层数目不会超过5，因为 `DNN` 的激活函数是 `sigmoid`，反向传播时有梯度消失的问题。
 
-![DNN结构](./dnn.png)
+<div align=center>
+<img src = "./dnn.png" height = 80% width = 80%>
+</div>
 
 ## Forward
 
