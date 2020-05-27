@@ -111,6 +111,8 @@ Hard Attention 是一个随机的过程。Hard Attention 不会选择整个 Enco
 
 [https://www.cnblogs.com/guoyaohua/p/9429924.html](https://www.cnblogs.com/guoyaohua/p/9429924.html)
 
+[https://www.cnblogs.com/guoyaohua/p/9429924.html](https://www.cnblogs.com/guoyaohua/p/9429924.html)
+
 ## Self Attention
 
 我们可以将 Attention 的问题看作 Query，Key，Value 的问题，求解权重实际上就是计算 $Query*Key^T*Value$ 的过程。只不过 Key 和 Value 的值是相同的，即上一节中的 $h_j$，Query 即为 $H_i$。
