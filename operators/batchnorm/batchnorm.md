@@ -9,7 +9,7 @@ Internal Covariate Shift：google小组在论文 [Batch Normalization](https://a
 ## Batchnorm 原理
 
 Batchnorm 就是对每一层的输入数据进行归一化，不过如果每一层都归一化到均值为 0，方差为 1 的标准分布中，就会导致网络学习不到输入数据的特征，所以 Batchnorm 对此稍作了修改，使得最后的输出是均值为 $\beta$，方差为 $\gamma$ 的正态分布。算法原理如图 1 所示
-![algorithm](./algorithm.png)
+
 <div align=center>
 <img src="./algorithm.png" height="50%" width = "50%">
 <br>
