@@ -27,7 +27,33 @@ Batchnorm 就是对每一层的输入数据进行归一化，不过如果每一�
 
 ## Batchnorm 源码解析
 
+这里的源码部分只分析相关的 cpu 源码，在 aten/src/ATen/native/Normalization.cpp 文件中。
+
+### Forward
+
+Batchnorm 入口为 batch_norm_cpu 函数。Forward 中均值和方差的计算如图 1 所示
+
+<div align=center>
+<img src="./bn_mean_var.png" height="100%" width="100%">
+<br>
+图1 Batchnorm 均值和方差的计算
+</div>
+
+其中 var_sum 表示的当前输入 input 的方差之和， save_mean 和 save_var_transform 变量分别表示当前输入的 input 的均值和 $1/\sqrt{var\_sum/n+eps}$，$eps$ 是一个极小的正浮点数，为了防止除数为 0，实际上 save_var_transform 表示的就是标准差的倒数，这是为了之后计算 output 的时候更加方便。还有一点需要注意，Batchnorm 的计算均是以一个 channel 为单位的，也就是每个 channel 都有一对对应的均值和标准差或者方差。
+
+图 2 中就是具体更新 output 的操作，依然是以一个 channel 为基本单位。分为训练和预测两种情况。如果此时是训练，根据 save_mean 和 save_var_transform 来更新 output，注意此时的 invstd 直接就等于对应的数组 save_var_transform 的元素。如果此时是预测阶段，那么是根据 running_mean 和 running_var 来更新参数，而此时的 instvd 等于的是标准差的倒数。代码中的 weight 和 bias 是在训练时进行更新的。
+<div align=center>
+<img src="./bn_out_update.png" height="100%" width="100%">
+<br>
+图2 Batchnorm output 的更新
+</div>
+
+### Backward
+
+Backward 不难，但是巨麻烦，目前对着代码还没有推导通，可以参考 [https://www.cnblogs.com/shine-lee/p/11989612.html](https://www.cnblogs.com/shine-lee/p/11989612.html) 和 [https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html](https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html)。原理还是链式求导法则。
+
 ## Batchnorm 优点
+
 没有它之前，需要小心的调整学习率和权重初始化，使用了了 Batchnorm 可以放心的使用大学习率，不用小心的调参了，较大的学习率极大的提高了学习速度。
 
 Batchnorm 本身上也是一种正则的方式，可以代替其他正则方式如 dropout 等。
