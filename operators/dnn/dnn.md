@@ -22,7 +22,7 @@ $\frac{\delta{E}}{\delta{b_h}} =\sum_{j=1}^l\frac{\delta{E}}{\delta{\beta}_j}w_{
 
 $\frac{\delta{E}}{\delta\alpha_h} =w_h^T\times{\delta}^2\sigma^{'}({b_h})$
 
-$\delta^1=\frac{\delta{E}}{\delta\alpha} = w^T\times{\delta}^2\sigma^{'}({b_h})$ 
+$\delta^1=\frac{\delta{E}}{\delta\alpha} = w_h^T\times{\delta}^2\sigma^{'}({b_h})$ 
 
 其中 $\delta$ 的上标代表的时网络中的层数。如果网络中有偏置量，则偏置向量的梯度为当前层的 $\delta$，这个比较好理解，因为神经元的输入值相对于偏置的导数为 1。整个过程之中运用了链式求导法则。
 
