@@ -11,7 +11,14 @@ model = torch.load("alexnet.pt")
 # inference mode
 model.eval()
 
-input_names = ["actual_input_1"] + ["learned_%d" % i for i in range(16)]
-output_names = ["output1"]
+# 为模型的输入输出重新命名，也可以不做此操作
+input_names = ["input0"]
+output_names = ["output0"]
 
-torch.onnx.export(model, dummy_input, "alexnet.onnx", verbose=True, input_names=input_names, output_names=output_names)
+torch.onnx.export(
+    model = model, 
+    args = dummy_input, 
+    "alexnet.onnx", 
+    verbose=True, 
+    input_names=input_names, 
+    output_names=output_names)

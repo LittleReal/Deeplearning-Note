@@ -1,5 +1,13 @@
 # Pytorch Model to Tensorrt
 
+## Pytorch 设置 GPU
+`gpu_index = 0`  
+1. `device=torch.device('cuda:%d'%gpu_index)`  
+2. `device = torch.device('cuda', gpu_index)`  
+3. `import os  
+os.environ["CUDA_VISIBLE_DEVICES"]='%d'%gpu_index`  
+*torch.cuda.current_device() 返回的是从当前设置的 gpu 从 0 开始编号的 current_device* 
+
 ## Pytorch 存储和加载模型方式
 ### 存储和加载整个模型
 `torch.save(model_object, "model.pt")`
